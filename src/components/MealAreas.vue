@@ -1,11 +1,11 @@
 <template>
   <div v-if="!isLoading">
     <SearchBar v-bind:updateSearchValue="updateSearchValue" />
-    <ul class="list-unstyled">
-      <MealItem
-        v-bind:meal="meal"
-        v-for="meal in filteredMeals"
-        :key="meal.idMeal"
+    <ul class="list-group list-group-flush">
+      <AreaItem
+        v-bind:area="area"
+        v-for="area in filteredAreas"
+        :key="area.strArea"
       />
     </ul>
   </div>
@@ -16,41 +16,40 @@
 
 <script>
 import SearchBar from "./SerachBar";
-import MealItem from "./MealItem";
+import AreaItem from "./AreaItem";
 
 export default {
-  name: "MealList",
-  props: ["strArea"],
+  name: "MealAreas",
   components: {
     SearchBar,
-    MealItem
+    AreaItem
   },
   data() {
     return {
       search: "",
-      isLoading: true,
-      meals: []
+      areas: [],
+      isLoading: true
     };
   },
   created() {
-    this.getMeals();
+    this.getAreas();
   },
   methods: {
-    async getMeals() {
+    async getAreas() {
       const res = await this.axios.get(
-        `https://www.themealdb.com/api/json/v1/1/filter.php?a=${this.strArea}`
+        "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
       );
-      this.meals = res.data.meals;
       this.isLoading = false;
+      this.areas = res.data.meals;
     },
     updateSearchValue(searchValue) {
       this.search = searchValue;
     }
   },
   computed: {
-    filteredMeals() {
-      return this.meals.filter(meal => {
-        return meal.strMeal.toLowerCase().includes(this.search.toLowerCase());
+    filteredAreas() {
+      return this.areas.filter(area => {
+        return area.strArea.toLowerCase().includes(this.search.toLowerCase());
       });
     }
   }

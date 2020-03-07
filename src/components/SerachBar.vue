@@ -1,11 +1,11 @@
 <template>
-  <form class="form-inline my-3">
+  <form id="searchbar" class="form-inline my-3">
     <input
       v-bind:search="search"
       v-on:input="updateSearchValue($event.target.value)"
-      class="form-control mr-sm-2"
+      class="form-control col-12"
       type="search"
-      placeholder="Search"
+      placeholder="Filter"
     />
   </form>
 </template>

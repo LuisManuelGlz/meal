@@ -2,8 +2,10 @@
   <li class="list-group-item">
     <router-link
       :to="{ name: 'meal-list', params: { strArea: area.strArea } }"
-      >{{ area.strArea }}</router-link
+      class="nav-link"
     >
+      {{ area.strArea }}
+    </router-link>
   </li>
 </template>
 

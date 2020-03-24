@@ -18,7 +18,7 @@ const router = new VueRouter({
   mode: "history",
   base: __dirname,
   routes: [
-    { path: "/", component: MealAreas },
+    { path: "/", name: 'meal-areas', component: MealAreas },
     { path: "/:strArea", name: "meal-list", component: MealList, props: true },
     { path: "/meal/:idMeal", name: 'meal-detail', component: MealDetail, props: true }
   ]
